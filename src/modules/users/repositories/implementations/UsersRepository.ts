@@ -25,6 +25,7 @@ class UsersRepository implements IUsersRepository {
     Object.assign(user, {
       name,
       email,
+      id: uuidv4(),
     });
 
     this.users.push(user);
@@ -45,7 +46,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   list(): User[] {
-    // Complete aqui
+    return this.users;
   }
 }
 
