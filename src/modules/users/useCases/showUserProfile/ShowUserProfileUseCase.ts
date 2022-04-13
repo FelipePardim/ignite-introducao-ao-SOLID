@@ -9,12 +9,16 @@ class ShowUserProfileUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User {
+    if (!user_id) {
+      throw new Error("User id not informed on the request");
+    }
+
     const userAlreadyExists = this.usersRepository.findById(user_id);
 
-    if (userAlreadyExists) {
-      return userAlreadyExists;
+    if (!userAlreadyExists) {
+      throw new Error("user not found");
     }
-    throw new Error("user not found");
+    return userAlreadyExists;
   }
 }
 
