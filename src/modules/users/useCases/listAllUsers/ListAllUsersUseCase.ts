@@ -10,13 +10,13 @@ class ListAllUsersUseCase {
 
   execute({ user_id }: IRequest): User[] {
     if (!user_id) {
-      throw new Error("User id nor informed");
+      throw new Error("User id not informed on the request");
     }
 
     const user = this.usersRepository.findById(user_id);
     const isAdmin = user.admin;
 
-    if (!isAdmin) {
+    if (isAdmin === false) {
       throw new Error("The user does not have admin rights");
     }
 
