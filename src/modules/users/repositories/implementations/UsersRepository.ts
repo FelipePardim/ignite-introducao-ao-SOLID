@@ -25,8 +25,8 @@ class UsersRepository implements IUsersRepository {
     Object.assign(user, {
       name,
       email,
-      id: uuidv4(),
       admin: false,
+      id: uuidv4(),
       created_at: new Date(),
       updated_at: new Date(),
     });
