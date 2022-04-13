@@ -26,6 +26,9 @@ class UsersRepository implements IUsersRepository {
       name,
       email,
       id: uuidv4(),
+      admin: false,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
 
     this.users.push(user);
@@ -42,7 +45,10 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    receivedUser.updated_at = new Date();
+    receivedUser.admin = true;
+
+    return receivedUser;
   }
 
   list(): User[] {
