@@ -12,7 +12,7 @@ class ShowUserProfileController {
       const existingUser = this.showUserProfileUseCase.execute({ user_id });
       return response.status(201).send(existingUser);
     } catch (error) {
-      return response.status(500).send({ error: error.message });
+      return response.status(404).send({ error: error.message });
     }
   }
 }
