@@ -13,7 +13,7 @@ class TurnUserAdminUseCase {
       throw new Error("User id not informed on the request");
     }
 
-    const userExists = this.usersRepository.findById(user_id);
+    const userExists = this.usersRepository.findById({ user_id });
 
     if (!userExists) {
       throw new Error("This user id does not exists");
