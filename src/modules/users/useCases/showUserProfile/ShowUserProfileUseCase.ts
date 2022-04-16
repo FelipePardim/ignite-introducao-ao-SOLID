@@ -16,7 +16,7 @@ class ShowUserProfileUseCase {
     const userAlreadyExists = this.usersRepository.findById(user_id);
 
     if (!userAlreadyExists) {
-      throw new Error("user not found");
+      throw new Error("User not found");
     }
     return userAlreadyExists;
   }
