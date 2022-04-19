@@ -10,7 +10,7 @@ class ShowUserProfileController {
 
     try {
       const existingUser = this.showUserProfileUseCase.execute({ user_id });
-      return response.status(201).send(existingUser);
+      return response.status(200).send(existingUser);
     } catch (error) {
       return response.status(404).send({ error: error.message });
     }
