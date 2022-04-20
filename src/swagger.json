@@ -35,13 +35,61 @@
       }
      }
     },
-    "response": {
+    "responses": {
      "201": {
-      "description": "User created"
-     },
+      "description": "User created.",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "admin": {
+                "type": "boolean"
+              },
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              }
+            },
+            "example": {
+              "admin": false,
+              "id": "c5c739c0-4576-47a4-82f5-8b314d2eba21",
+              "name": "user",
+              "email": "user@user.com",
+              "created_at": "2022-04-20T19:42:40.759Z",
+              "updated_at": "2022-04-20T19:42:40.759Z"
+            }
+          }
+        }
+      }
+    },
      "400": {
-      "description": "Email already used"
-     }
+      "description": "User email already used.",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "error": "string"
+            },
+            "example": {
+              "error": "User already exists!"
+            }
+          }
+        }
+      }
+    }
     }
    },
    "get": {
