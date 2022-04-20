@@ -96,42 +96,162 @@
     "tags": ["Users"],
     "summary": "Get a user",
     "description": "Get a user by user_id",
-    "requestBody": {
-     "content": {
-      "application/json": {
+    "parameters": [
+     {
+       "in": "header",
+       "name": "user_id",
+       "required": true,
        "schema": {
-        "type": "object",
-        "properties": {
-         "name": {
-          "type": "string"
-         },
-         "email": {
-          "typr": "string"
-         }
-        },
-        "example": {
-         "name": "John Doe",
-         "email": "johndoe@user.com"
-        }
+         "type": "string",
+         "format": "uuid"
        }
-      }
      }
-    },
-    "response": {
+   ],
+    "responses": {
      "200": {
-      "description": "User found"
-     },
-     "404": {
-      "description": "User not found"
+      "description": "Success",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "admin": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "example": [
+                {
+                  "admin": true,
+                  "id": "c5c739c0-4576-47a4-82f5-8b314d2eba21",
+                  "name": "user",
+                  "email": "user@user.com.br",
+                  "created_at": "2022-04-20T19:42:40.759Z",
+                  "updated_at": "2022-04-20T19:42:40.759Z"
+                },
+                {
+                  "admin": false,
+                  "id": "d32e9e4e-43cd-4f64-a393-4f0158c9e348",
+                  "name": "John Doe",
+                  "email": "john.doe@user.com.br",
+                  "created_at": "2022-04-20T19:42:40.759Z",
+                  "updated_at": "2022-04-20T19:42:40.759Z"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "404": {
+     "description": "User not found.",
+     "content": {
+       "application/json": {
+         "schema": {
+           "type": "object",
+           "properties": {
+             "error": "string"
+           },
+           "example": {
+             "error": "User not found"
+           }
+         }
+       }
      }
+   }
     }
-   },
-   "patch": {
-
    }
   },
-  "/users/:user_id/admin": {
-   "tags": ["Users"]
+  "/users/{user_id}/admin": {
+   "patch": {
+    "tags": [
+      "users"
+    ],
+    "summary": "Turn a user into an admin.",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "user_id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "User turned into a admin.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "admin": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "admin": true,
+                "id": "c5c739c0-4576-47a4-82f5-8b314d2eba21",
+                "name": "user",
+                "email": "user@user.com.br",
+                "created_at": "2022-04-20T19:42:40.759Z",
+                "updated_at": "2022-04-20T19:42:40.759Z"
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "User not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": "string"
+              },
+              "example": {
+                "error": "User not found"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   }
  }
 }
